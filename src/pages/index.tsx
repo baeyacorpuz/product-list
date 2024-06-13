@@ -1,11 +1,9 @@
-import Modal from 'react-modal';
-
 import useProducts from "./use-products-table";
 import Table from "../components/table";
 import TableHeader from "../components/table/table-head";
 import TableBody from "../components/table/table-body";
-
-Modal.setAppElement('#root');
+import ModalContainer from "../components/modal";
+import QuickPreview from "../components/quick-preview";
 
 const headers = [
 	{
@@ -113,7 +111,7 @@ const getTableRows = ({
 		})
 
 		rowValue.id = sku;
-		rowValue.action = () => handlePreview(id);
+		rowValue.action = () => handlePreview(row);
 
 		rowValues.push(rowValue)
 	})
@@ -129,6 +127,7 @@ const Products = () => {
 		isLoading,
 		isPreviewOpen,
 		searchTerm,
+		selectedProduct,
 		togglePreviewModal
 	} = useProducts();
 
@@ -176,18 +175,12 @@ const Products = () => {
 
 			{/* TODO: Modal */}
 			{/* Modal */}
-			<Modal
-				isOpen={isPreviewOpen}
-				onRequestClose={togglePreviewModal}
-				contentLabel="Example Modal"
+			<ModalContainer
+				isPreviewOpen={isPreviewOpen}
+				togglePreviewModal={togglePreviewModal}
 			>
-				<div className="flex flex-col gap-4">
-					<div className="flex">
-						<p className="uppercase"></p>
-						<p className="text-3xl"></p>
-					</div>
-				</div>
-			</Modal>
+				<QuickPreview selectedProduct={selectedProduct} />
+			</ModalContainer>
 		</div>
 	);
 }

@@ -6,6 +6,7 @@ const useProducts = () => {
 	const [skip, setSkip] = useState(0);
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [selectedProduct, setSelectedProduct] = useState({});
 
 	useEffect(() => {
 		const loadInitialData = async () => {
@@ -42,7 +43,8 @@ const useProducts = () => {
 		setIsPreviewOpen(!isPreviewOpen)
 	}
 
-	const handlePreview = (id) => {
+	const handlePreview = (row) => {
+		setSelectedProduct(row)
 		togglePreviewModal();
 	}
 
@@ -53,6 +55,7 @@ const useProducts = () => {
 		isLoading,
 		isPreviewOpen,
 		searchTerm,
+		selectedProduct,
 		togglePreviewModal
 	};
 }
