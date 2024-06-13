@@ -1,7 +1,11 @@
+import Modal from 'react-modal';
+
 import useProducts from "./use-products-table";
 import Table from "../components/table";
 import TableHeader from "../components/table/table-head";
 import TableBody from "../components/table/table-body";
+
+Modal.setAppElement('#root');
 
 const headers = [
 	{
@@ -123,7 +127,9 @@ const Products = () => {
 		handleChange,
 		handlePreview,
 		isLoading,
-		searchTerm
+		isPreviewOpen,
+		searchTerm,
+		togglePreviewModal
 	} = useProducts();
 
 	const tableChildren = generateTableChildren({
@@ -134,7 +140,7 @@ const Products = () => {
 	})
 
 	return (
-		<div className="pt-10 w-10/12 m-auto">
+		<div className="pt-10 w-10/12 m-auto" id="productList">
 			<div className="bg-sm p-2 mb-4">
 				<h1 className="text-lg text-base-100 self-center text-center uppercase">Products Demo</h1>
 			</div>
@@ -170,6 +176,18 @@ const Products = () => {
 
 			{/* TODO: Modal */}
 			{/* Modal */}
+			<Modal
+				isOpen={isPreviewOpen}
+				onRequestClose={togglePreviewModal}
+				contentLabel="Example Modal"
+			>
+				<div className="flex flex-col gap-4">
+					<div className="flex">
+						<p className="uppercase"></p>
+						<p className="text-3xl"></p>
+					</div>
+				</div>
+			</Modal>
 		</div>
 	);
 }

@@ -53,6 +53,7 @@ const useProducts = () => {
 		isLoading,
 		isPreviewOpen,
 		searchTerm,
+		togglePreviewModal
 	};
 }
 
