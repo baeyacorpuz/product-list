@@ -23,6 +23,7 @@ const useProducts = () => {
 	const handleChange = async (e: any) => {
 		const term = e.target.value;
 		setSearchTerm(term);
+		setIsLoading(true)
 		term && await fetch(`https://dummyjson.com/products/search?q=${term}`)
 			.then((response) => response.json())
 			.then(data => {
@@ -34,10 +35,15 @@ const useProducts = () => {
 			.then(data => {
 				setData(data);
 			})
+		setIsLoading(false)
 	}
 
-	const handlePreview = () => {
-		setIsPreviewOpen(true)
+	const togglePreviewModal = () => {
+		setIsPreviewOpen(!isPreviewOpen)
+	}
+
+	const handlePreview = (id) => {
+		togglePreviewModal();
 	}
 
 	return {

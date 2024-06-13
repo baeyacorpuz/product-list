@@ -2,10 +2,11 @@ const TableBody = ({ data }: any) => {
 	return (
 		<tbody>
 				{data && data.map((row: any) => (
-					<tr className="" key={row.id}>
+					<tr className="" key={row.id} onClick={row.action}>
 						{row.map((item: any) => {
 							let textElement;
 							let truncateWidth;
+							let action;
 
 							if (typeof item === "string") {
 								textElement = item;
@@ -13,10 +14,12 @@ const TableBody = ({ data }: any) => {
 								({
 									textElement,
 									truncateWidth,
+									action,
 								} = Object.assign({}, {
 									textElement: '',
 									withTruncate: false,
 									truncateWidth,
+									action
 								}, item))
 							}
 

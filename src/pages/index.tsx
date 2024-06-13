@@ -63,9 +63,10 @@ const getTableRows = ({
 
 	data?.products && data?.products.forEach((row: any) => {
 		const {
-			sku,
 			description,
+			id,
 			price,
+			sku,
 			title,
 			thumbnail,
 		} = row;
@@ -108,6 +109,7 @@ const getTableRows = ({
 		})
 
 		rowValue.id = sku;
+		rowValue.action = () => handlePreview(id);
 
 		rowValues.push(rowValue)
 	})
@@ -136,8 +138,10 @@ const Products = () => {
 			<div className="bg-sm p-2 mb-4">
 				<h1 className="text-lg text-base-100 self-center text-center uppercase">Products Demo</h1>
 			</div>
+			{/* TODO: View changer, Table & Grid/Card */}
 
 			<div className="pb-2 mb-4">
+				{/* TODO: Clearable input */}
 				<input
 					placeholder="Search product ..."
 					id="search"
@@ -158,11 +162,13 @@ const Products = () => {
 					<div className="pb-2 mb-4">
 						<Table>
 							{tableChildren}
+								{/* TODO: Pagination */}
 						</Table>
 					</div>
 				</div>
 			)}
 
+			{/* TODO: Modal */}
 			{/* Modal */}
 		</div>
 	);
