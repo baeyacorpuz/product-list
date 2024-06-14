@@ -29,9 +29,9 @@ const QuickPreview = ({
 			</div>
 
 			<div className="grid grid-cols-4 gap-2">
-				{images.filter((i, index: number) => index < 4).map((item, index) => (
-					<div className="col-auto bg-base-100 border border-neutral">
-						<img className="h-20 w-full object-cover" src={item} />
+				{images.filter((i, index: number) => index < 4).map((item) => (
+					<div key={item.id} className="col-auto  border border-slate bg-slate">
+						<img className="h-28 w-full object-cover" src={item} />
 					</div>
 				))}
 			</div>

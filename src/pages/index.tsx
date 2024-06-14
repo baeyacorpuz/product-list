@@ -49,7 +49,13 @@ const generateTableChildren = ({
 		<TableHeader {...{
 			headers: getTableheaders(headers)
 		}} />
-		<TableBody data={data} />
+		{data.length > 0 ? (
+			<TableBody data={data} />
+		) : (
+			<div className="w-full p-3">
+				No results found
+			</div>
+		)}
 	</>
 );
 
@@ -151,7 +157,7 @@ const Products = () => {
 					placeholder="Search product ..."
 					id="search"
 					name="search"
-					type="text"
+					type="search"
 					value={searchTerm}
 					onChange={handleChange}
 					className="w-full max-h-[56px] flex p-3 border-neutral border focus:outline-none focus:border-sm"

@@ -13,7 +13,8 @@ export default {
       "success": "#79AB33",
       "warning": "#F67926",
       "error": "#89000B",
-      "sm": "#0030FF"
+      "sm": "#0030FF",
+      "slate": "#f8fafc"
     },
   },
   plugins: [],
