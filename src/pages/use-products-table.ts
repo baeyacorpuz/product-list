@@ -43,7 +43,7 @@ const useProducts = () => {
 		setIsPreviewOpen(!isPreviewOpen)
 	}
 
-	const handlePreview = (row) => {
+	const handlePreview = (row: any) => {
 		setSelectedProduct(row)
 		togglePreviewModal();
 	}

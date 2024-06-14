@@ -72,7 +72,6 @@ const getTableRows = ({
 	data?.products && data?.products.forEach((row: any) => {
 		const {
 			description,
-			id,
 			price,
 			sku,
 			title,
