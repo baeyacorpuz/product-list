@@ -4,6 +4,7 @@ import TableHeader from "../components/table/table-head";
 import TableBody from "../components/table/table-body";
 import ModalContainer from "../components/modal";
 import QuickPreview from "../components/quick-preview";
+import Pagination from "../components/pagination";
 
 const headers = [
 	{
@@ -127,12 +128,16 @@ const getTableRows = ({
 const Products = () => {
 	const {
 		data,
+		errorMsg,
 		handleChange,
+		handleNext,
 		handlePreview,
 		isLoading,
 		isPreviewOpen,
 		searchTerm,
 		selectedProduct,
+		selectedLimit,
+		setSelectedLimit,
 		togglePreviewModal
 	} = useProducts();
 
@@ -151,7 +156,6 @@ const Products = () => {
 			{/* TODO: View changer, Table & Grid/Card */}
 
 			<div className="pb-2 mb-4">
-				{/* TODO: Clearable input */}
 				<input
 					placeholder="Search product ..."
 					id="search"
@@ -169,17 +173,24 @@ const Products = () => {
 				</div>
 			) : (
 				<div className="pb-2 mb-4">
-					<div className="pb-2 mb-4">
-						<Table>
-							{tableChildren}
+						{errorMsg ? (
+							errorMsg
+						) : (
+								<div className="pb-2 mb-4">
+									<Table>
+										{tableChildren}
+									</Table>
 								{/* TODO: Pagination */}
-						</Table>
-					</div>
+									<Pagination
+										handleNext={handleNext}
+										setSelectedLimit={setSelectedLimit}
+										selectedLimit={selectedLimit}
+									/>
+								</div>
+						)}
 				</div>
 			)}
 
-			{/* TODO: Modal */}
-			{/* Modal */}
 			<ModalContainer
 				isPreviewOpen={isPreviewOpen}
 				togglePreviewModal={togglePreviewModal}

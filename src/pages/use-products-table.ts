@@ -7,19 +7,25 @@ const useProducts = () => {
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedProduct, setSelectedProduct] = useState({});
+	const [selectedLimit, setSelectedLimit] = useState({
+		value: "10",
+		label: "10"
+	})
+	const [errorMsg, setErrorMsg] = useState("")
 
 	useEffect(() => {
-		const loadInitialData = async () => {
-			setIsLoading(true)
-			const response = await fetch('https://dummyjson.com/products?limit=10')
-				.then(res => res.json())
-			setIsLoading(false)
+		loadInitialDataAction();
+	}, [selectedLimit, skip])
 
-			setData(response)
-		}
+	const loadInitialDataAction = async () => {
+		setIsLoading(true)
+		await fetch(`https://dummyjson.com/products?limit=${selectedLimit.value}&skip=${skip}`)
+			.then(res => res.json())
+			.then((data) => setData(data))
+			.catch(() => setErrorMsg("Failed to fetch"))
+		setIsLoading(false)
 
-		loadInitialData();
-	}, [])
+	}
 
 	const handleChange = async (e: any) => {
 		const term = e.target.value;
@@ -48,15 +54,23 @@ const useProducts = () => {
 		togglePreviewModal();
 	}
 
+	const handleNext = async () => {
+		await setSkip(skip + parseFloat(selectedLimit.value))
+	}
+
 	return {
 		data,
 		handleChange,
+		handleNext,
 		handlePreview,
 		isLoading,
 		isPreviewOpen,
 		searchTerm,
 		selectedProduct,
-		togglePreviewModal
+		selectedLimit,
+		setSelectedLimit,
+		togglePreviewModal,
+		errorMsg
 	};
 }
 
